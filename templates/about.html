@@ -1,19 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello Flask</title>
-</head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-            <li><a href="{{ url_for('contact') }}">Contact</a></li>
-        </ul>
-    </nav>
-    <h1>About Page</h1>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+    <!-- Using the [0] retrieves the first element from the json file array -->
+    <!-- Identifying "name" pulls out the "name" data for the object at index 0 -->
+    <!-- {{ company[0]["name"] }} -->
+    
+
+    <h2>{{ page_title }}</h2>
+    <p>
+        The formation of the group grew out of a meeting Gandalf had with Thorin in Bree which kindled Thorin's interest
+        in recapturing his long lost family inheritance. (Thorin's grandfather had been the King under the Mountain when
+        Smaug came and took it.) Remembering that he had once known an adventurous Hobbit on his travels in the Shire,
+        Gandalf decided to add Bilbo to their company because he knew that stealth and cunning were preferable to force.
+        Gandalf also believed that someone like Bilbo could keep the sometimes prideful and stubborn Dwarves from rash
+        action. The superstitious Dwarves also considered thirteen to be an unlucky number, and as Gandalf had planned
+        to leave on other business, welcomed a fourteenth to fill into their party.
+    </p>
+    <!-- declares variable 'member' in the list 'company.json' and iterates through each 'member' -->
+    {% for member in company %}
+
+
+
+        <div class="row featurette">
+            <!-- Checks if loop index is odd (not divisible by 2) -->
+            {% if loop.index % 2 != 0 %}
+
+                <div class="col-md-7">
+                    <!-- Calls the iteration number of that item in the loop iteration -->
+                    <!-- Calls the 'name' of each member using dot notation to be entered in the <h3> element-->
+                    <h3>{{ loop.index }}. {{ member.name }}</h3>
+                    <p>
+                        {{ member.description }}
+                    </p>
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ member.image_source }}" alt="" class="featurette-image image-responsive">
+                </div>
+            
+            {% else %}
+
+                <div class="col-md-5">
+                    <img src="{{ member.image_source }}" alt="" class="featurette-image image-responsive">
+                </div>
+                <div class="col-md-7">
+                    <!-- Calls the iteration number of that item in the loop iteration -->
+                    <!-- Calls the 'name' of each member using dot notation to be entered in the <h3> element-->
+                    <h3>{{ loop.index }}. {{ member.name }}</h3>
+                    <p>
+                        {{ member.description }}
+                    </p>
+                </div>
+
+            {% endif %}
+
+        </div>
+        <!-- If statement only includes horizontal rule if not the last item -->
+        {% if loop.index != loop.length %}
+
+            <hr class="featurette-divider">
+
+        {% endif %}
+    <!-- Important to close the for loop created above featurette -->
+    {% endfor %}
+    
+{% endblock %}
