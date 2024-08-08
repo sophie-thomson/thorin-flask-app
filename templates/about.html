@@ -27,7 +27,7 @@
                 <div class="col-md-7">
                     <!-- Calls the iteration number of that item in the loop iteration -->
                     <!-- Calls the 'name' of each member using dot notation to be entered in the <h3> element-->
-                    <h3>{{ loop.index }}. {{ member.name }}</h3>
+                    <h3><a href="/about/{{ member.url }}">{{ loop.index }}. {{ member.name }}</a></h3>
                     <p>
                         {{ member.description }}
                     </p>
@@ -44,7 +44,7 @@
                 <div class="col-md-7">
                     <!-- Calls the iteration number of that item in the loop iteration -->
                     <!-- Calls the 'name' of each member using dot notation to be entered in the <h3> element-->
-                    <h3>{{ loop.index }}. {{ member.name }}</h3>
+                    <h3><a href="/about/{{ member.url }}">{{ loop.index }}. {{ member.name }}</a></h3>
                     <p>
                         {{ member.description }}
                     </p>
